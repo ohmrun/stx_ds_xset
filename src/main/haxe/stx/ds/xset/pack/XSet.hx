@@ -1,0 +1,125 @@
+package stx.ds.xset.pack;
+
+typedef XSetDef<K,V> = {
+  with : XSetWith<K,V>,
+  data : Set<AXSetVal<K,V>>,
+}
+
+@:forward abstract XSet<K,V>(XSetDef<K,V>) from XSetDef<K,V> to XSetDef<K,V> {
+  
+  static public function makeKV<K,V>(key:Comparable<K>,val:Comparable<V>,?data:RBTree<XSetVal<K,V>>){
+    var with = new XSetWith(new With(key,val));
+    return XSet.create(with,Set.make(with.comparable(),data));
+  }
+  static public function make<K,V>(with:With<K,V>,?data:RBTree<XSetVal<K,V>>){
+    var with = new XSetWith(with);
+    return new XSet({ with : with , data : Set.make(with.comparable(),data) });
+  }
+  static public function create<K,V>(with:XSetWith<K,V>,data:Set<XSetVal<K,V>>){
+    return new XSet({ with : with, data : data});
+  }
+  private function new(self:XSetDef<K,V>){
+    this = self;
+  }
+  public function ltx(that:XSet<K,V>,with:Comparable<XSetVal<K,V>>):Ordered{
+    var current = this.data.with;
+    var self    = uses(with);
+    return self.lt(that);
+  }
+  function next(data):XSet<K,V>{
+    return create(this.with,data);
+  }
+  public function uses(with:Comparable<XSetVal<K,V>>):XSet<K,V>{
+    return next(this.data.uses(with));
+  }
+  public function whilst(with:Comparable<XSetVal<K,V>>,fn:XSet<K,V>->XSet<K,V>):XSet<K,V>{
+    var current = this.data.with;
+    var next    = uses(with);
+    var last    = fn(next).uses(current);
+    return last;
+  }
+  public function lt(that:XSet<K,V>):Ordered{
+    return this.data.lt(that.data);
+  }
+  public function eq(that:XSet<K,V>):Equaled{
+    return this.data.eq(that.data);
+  }
+  public function eqx(that:XSet<K,V>,with:Comparable<XSetVal<K,V>>):Equaled{
+    var current = this.with;
+    var self    = uses(with);
+    return self.eq(that);
+  }
+  public function put(v:XSetVal<K,V>):XSet<K,V>{
+    return next(this.data.put(v));
+  }
+  public function set(k:K,v:Either<XSet<K,V>,V>):XSet<K,V>{
+    return switch(v){
+      case Left(v)  : put(SetObj(k,v));
+      case Right(v) : put(SetVal(k,v));
+    }
+  }
+  public function setVal(k:K,v:V){
+    return set(k,Right(v));
+  }
+  public function setSet(k:K,v:XSet<K,V>){
+    return set(k,Left(v));
+  }
+  function as(st:XSetWithState):XSet<K,V>{
+    return create(this.with.as(st),this.data);
+  }
+  public function keyspace():XSet<K,V>{
+    return uses(this.with.keyspace().comparable()).as(CKey);
+  }
+  public function valspace():XSet<K,V>{
+    return uses(this.with.valspace().comparable()).as(CVal);
+  }
+  public function setspace():XSet<K,V>{
+    return uses(this.with.setspace().comparable()).as(CKeyVal);
+  }
+  public function has(v){
+    return this.data.has(v);
+  }
+  public function hasKey(k:K){
+    return keyspace().has(
+      SetVal(k,null)
+    );
+  }
+  public function hasNode(v:XSet<K,V>){
+    return valspace().has(
+      SetObj(null,v)
+    );
+  }
+  public function hasLeaf(v:V){
+    return valspace().has(
+      SetVal(null,v)
+    );
+  }
+  public function filter(fn){
+    return next(this.data.filter(fn));
+  }
+  public function restrict(itr:Array<K>){
+    return filter(
+      (item) -> keyspace().has(item)
+    );
+  }
+  public function union(that:XSet<K,V>):XSet<K,V>{
+    return switch([this.data.data,that.data.data]){
+      case [Leaf,Leaf]                                                  :  
+        that;
+      case [Node(_, left0, SetObj(k0,v0), right0),Node(_,left1,SetObj(k1,v1),right1)]   : 
+        null;
+      case [Node(_, left0, label0, right0),Node(_,left1,label1,right1)]   : 
+        null;
+      case [x,Leaf]                                                     :
+        this;
+      case [Leaf,x]                                                     :
+        that;
+    }
+  }
+  public function difference(that:XSet<K,V>){
+    return next(this.data.difference(that.data));
+  }
+  public function toString(){
+    return this.data.toString();
+  }
+}

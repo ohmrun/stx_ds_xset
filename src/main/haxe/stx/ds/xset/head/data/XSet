@@ -1,0 +1,8 @@
+package stx.ds.xset.head.data;
+
+import stx.ds.xset.pack.XSetVal in AXSetVal;
+
+typedef XSet<K,V> = {
+  with : XSetWith<K,V>,
+  data : Set<AXSetVal<K,V>>,
+}

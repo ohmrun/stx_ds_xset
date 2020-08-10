@@ -1,0 +1,13 @@
+-main Main
+--interp
+
+-lib utest
+-lib stx_ds
+-lib stx_log
+-lib stx_om
+-lib stx_fn
+
+-cp src/main/haxe
+
+-D analyzer-optimize
+-D test=stx_xset

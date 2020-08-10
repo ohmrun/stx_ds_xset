@@ -1,0 +1,24 @@
+{
+    "name": "stx_xset",
+    "license": "MIT",
+    "tags": [
+        "cross",
+        "functional"
+    ],
+    "description": "Functional composition tools. Haxe 3.1.* required.",
+    "contributors": [
+        "0b1kn00b"
+    ],
+    "releasenote": "Wow, can post past version. oops",
+    "version": "0.0.1",
+    "url": "https://example.com",
+    "dependencies": {
+        "tink_core": "",
+        "stx_pico": "",
+        "stx_nano": "",
+        "stx_log": "",
+        "stx_om": "",
+        "stx_ds": ""
+    },
+    "classPath": "src/main/haxe"
+}

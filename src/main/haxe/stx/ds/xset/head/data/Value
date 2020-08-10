@@ -1,0 +1,7 @@
+package stx.ds.xset.head.data;
+
+enum XSetVal<K,V>{
+  SetObj(key:K,val:XSet<K,V>);
+  SetVal(key:K,val:V);
+  //SetNil;
+}
