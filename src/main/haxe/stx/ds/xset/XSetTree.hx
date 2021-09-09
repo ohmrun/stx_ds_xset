@@ -1,6 +1,6 @@
-package stx.ds.xset.pack;
+package stx.ds.xset;
 
-typedef XSetTreeDef = AXSet<AXSetPlace,Primitive>;
+typedef XSetTreeDef = XSet<XSetPlace,Primitive>;
 
 @:forward abstract XSetTree(XSetTreeDef) from XSetTreeDef{
   public function new(self:XSetTreeDef){
@@ -8,8 +8,8 @@ typedef XSetTreeDef = AXSet<AXSetPlace,Primitive>;
   }
   static public function unit():XSetTree{
     return XSet.makeKV(
-      new stx.ds.xset.pack.suit.XSetPlace.cases.XSetPlaceComparable(),
-      new stx.ds.xset.pack.suit.primitive.cases.PrimitiveComparable()
+      new stx.assert.comparable.term.XSetPlace(),
+      new stx.assert.comparable.term.Primitive()
     );
   }
   public function isObject(){
@@ -22,7 +22,7 @@ typedef XSetTreeDef = AXSet<AXSetPlace,Primitive>;
       true
     );
   }
-  public function isArray(){
+  public function isCluster(){
     return this.data.fold(
       (sv,memo) -> switch([sv.fst(),memo]){
         case [_,false]            : false;
@@ -33,9 +33,9 @@ typedef XSetTreeDef = AXSet<AXSetPlace,Primitive>;
     );
   }
   public function getType(){
-    return switch([isArray(),isObject()]){
+    return switch([isCluster(),isObject()]){
       case [false,true] : DTObject;
-      case [true,false] : DTArray;
+      case [true,false] : DTCluster;
       default           : DTMixed;
     }
   }
@@ -51,36 +51,36 @@ typedef XSetTreeDef = AXSet<AXSetPlace,Primitive>;
   public function keyspace():XSetTree{
     return this.keyspace();
   }
-  @:noUsing static public function fromSpine(sp:SpineT):XSetTree{
+  @:noUsing static public function fromSpine(sp:Spine<Noise>):XSetTree{
     var rec = null;
         rec = 
     function(sp):XSetTreeDef{
       return switch sp {
-        case SRecord(arr) : 
+        case Collate(arr) : 
           var out = arr.prj().mapi(
-            (i:Int,kv:Field<Thunk<SpineT>>) -> {
+            (i:Int,kv:Field<Thunk<Spine<Noise>>>) -> {
               return switch(kv.val()){
-                case SScalar(p) : SetVal(Field(i,kv.key),p);
+                case Primate(p) : SetVal(Field(i,kv.key),p);
                 case x          : SetObj(Field(i,kv.key),rec(x));
               }
             }
-          ).fold(
+          ).lfold(
             (n:XSetVal<XSetPlace,Primitive>,m:XSetTreeDef) -> m.put(n),
             XSetTree.unit().prj()
           );
           out;
-        case SArray(arr)  :   
+        case Collect(arr)  :   
           var out = arr.mapi(
             (i,v) -> switch(v()){
-              case SScalar(p) : SetVal(Index(i),p);
+              case Primate(p) : SetVal(Index(i),p);
               case x          : SetObj(Index(i),rec(x));
             }
-          ).fold(
+          ).lfold(
             (n:XSetVal<XSetPlace,Primitive>,m:XSetTreeDef) -> m.put(n),
             XSetTree.unit().prj()
           );
           out;
-        case SEmpty: 
+        case Unknown | Predate(_): 
           XSetTree.unit().prj();
         case x:
           throw(x);

@@ -1,21 +1,21 @@
-package stx.ds.xset.pack;
+package stx.ds.xset;
 
 typedef XSetDef<K,V> = {
   with : XSetWith<K,V>,
-  data : Set<AXSetVal<K,V>>,
+  data : RedBlackSet<XSetVal<K,V>>,
 }
 
 @:forward abstract XSet<K,V>(XSetDef<K,V>) from XSetDef<K,V> to XSetDef<K,V> {
   
-  static public function makeKV<K,V>(key:Comparable<K>,val:Comparable<V>,?data:RBTree<XSetVal<K,V>>){
+  static public function makeKV<K,V>(key:Comparable<K>,val:Comparable<V>,?data:RedBlackTree<XSetVal<K,V>>){
     var with = new XSetWith(new With(key,val));
-    return XSet.create(with,Set.make(with.comparable(),data));
+    return XSet.create(with,RedBlackSet.make(with.comparable(),data));
   }
-  static public function make<K,V>(with:With<K,V>,?data:RBTree<XSetVal<K,V>>){
+  static public function make<K,V>(with:With<K,V>,?data:RedBlackTree<XSetVal<K,V>>){
     var with = new XSetWith(with);
-    return new XSet({ with : with , data : Set.make(with.comparable(),data) });
+    return new XSet({ with : with , data : RedBlackSet.make(with.comparable(),data) });
   }
-  static public function create<K,V>(with:XSetWith<K,V>,data:Set<XSetVal<K,V>>){
+  static public function create<K,V>(with:XSetWith<K,V>,data:RedBlackSet<XSetVal<K,V>>){
     return new XSet({ with : with, data : data});
   }
   private function new(self:XSetDef<K,V>){
@@ -42,7 +42,7 @@ typedef XSetDef<K,V> = {
     return this.data.lt(that.data);
   }
   public function eq(that:XSet<K,V>):Equaled{
-    return this.data.eq(that.data);
+    return this.data.equals(that.data);
   }
   public function eqx(that:XSet<K,V>,with:Comparable<XSetVal<K,V>>):Equaled{
     var current = this.with;
@@ -89,7 +89,7 @@ typedef XSetDef<K,V> = {
       SetObj(null,v)
     );
   }
-  public function hasLeaf(v:V){
+  public function has_leaf(v:V){
     return valspace().has(
       SetVal(null,v)
     );
@@ -103,6 +103,7 @@ typedef XSetDef<K,V> = {
     );
   }
   public function union(that:XSet<K,V>):XSet<K,V>{
+    __.log().debug(_ -> _.pure([this.data.data,that.data.data]));
     return switch([this.data.data,that.data.data]){
       case [Leaf,Leaf]                                                  :  
         that;

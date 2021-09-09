@@ -1,9 +1,0 @@
-package stx.ds.xset.head.data;
-
-enum XCmd<K,V>{
-  In(k:K,cmd:XCmd<K,V>);
-  Put(v:XSet<K,V>);
-  Rem(k:K);
-  Del(v:XSet<K,V>);
-  // Get()
-}

@@ -1,11 +1,11 @@
-package stx.ds.xset.pack;
+package stx.ds.xset;
 
-enum XSetValDef<K,V>{
+enum XSetValSum<K,V>{
   SetObj(key:K,val:XSet<K,V>);
   SetVal(key:K,val:V);
   //SetNil;
 }
-abstract XSetVal<K,V>(XSetValDef<K,V>) from XSetValDef<K,V>{
+abstract XSetVal<K,V>(XSetValSum<K,V>) from XSetValSum<K,V> to XSetValSum<K,V> {
   public function new(self) this = self;
   public function fst():K{
     return switch(this){

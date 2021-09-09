@@ -1,4 +1,4 @@
-package stx.ds.xset.pack;
+package stx.ds.xset;
 
 enum Lense<Head,Tail,Key>{
   Unit;

@@ -1,15 +1,15 @@
-package stx.ds.xset.pack.suit.xsetwith.cases;
+package stx.assert.eq.term;
 
-class XSetWithEq<K,V> implements stx.assert.head.data.Eq<XSetVal<K,V>>{
-  var self : XSetWith<K,V>;
+class XSetWith<K,V> implements EqApi<XSetValT<K,V>>{
+  var self : XSetWithT<K,V>;
   public function new(self){
     this.self = self;
   }
-  public function duoply(a:XSetVal<K,V>,b:XSetVal<K,V>):Equaled{
+  public function comply(a:XSetValT<K,V>,b:XSetValT<K,V>):Equaled{
     return switch(self.state){
-      case CKey     : XSetWith.key(self.with.K).eq().duoply(a,b);
-      case CVal     : XSetWith.val(self.with.V).eq().duoply(a,b);
-      case CKeyVal  : XSetWith.kv(self.with).eq().duoply(a,b);
+      case CKey     : XSetWithT.key(self.with.K).eq().comply(a,b);
+      case CVal     : XSetWithT.val(self.with.V).eq().comply(a,b);
+      case CKeyVal  : XSetWithT.kv(self.with).eq().comply(a,b);
     }
   }
 }

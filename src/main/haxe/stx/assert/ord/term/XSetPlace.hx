@@ -1,7 +1,7 @@
 package stx.assert.ord.term;
 
-class XSetPlaceOrd implements OrdApi<XSetPlace> extends Clazz{
-  public function duoply(a:XSetPlace,b:XSetPlace):Ordered{
+class XSetPlace implements OrdApi<XSetPlaceT> extends Clazz{
+  public function comply(a:XSetPlaceT,b:XSetPlaceT):Ordered{
     return switch([a,b]){
       case [Field(idx,key),Field(idx0, key0)]: 
         idx < idx0 || key < key0;

@@ -1,9 +1,14 @@
-import stx.ds.xset.Package;
+using stx.Nano;
+using stx.ds.XSet;
+using stx.Test;
+
+import stx.ds.xset.test.*;
 
 class Main {
 	static function main(){
-		#if test
-			utest.UTest.run(cast stx.ds.xset.Package.tests());
-		#end
+		__.test(
+			[new XerSetTest()],
+			[]
+		);		
 	}
 }

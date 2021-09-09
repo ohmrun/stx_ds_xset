@@ -1,7 +1,7 @@
-package stx.ds.xset.head.data;
+package stx.ds.xset;
 
 enum XSetTreeType{
-  DTArray;
+  DTCluster;
   DTObject;
   DTMixed;
 }

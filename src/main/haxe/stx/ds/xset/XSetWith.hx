@@ -1,6 +1,6 @@
-package stx.ds.xset.pack;
+package stx.ds.xset;
 
-import stx.assert.pack.comparable.term.Base in BaseComparable;
+import stx.assert.comparable.term.Base in BaseComparable;
 
 class XSetWith<K,V>{
   public var state(default,null)   : XSetWithState;  

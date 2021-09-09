@@ -1,14 +1,14 @@
-package stx.assert.comparable;
+package stx.assert.comparable.term;
 
-class XSet<K,V> implements ComparableApi<XSetVal<K,V>>{
+class XSet<K,V> implements ComparableApi<XSetValT<K,V>>{
   var with : With<K,V>;
   public function new(with){
     this.with = with;
   }
   public function eq(){
-    return new XSetEq(this.with);
+    return new stx.assert.eq.term.XSet(this.with);
   }
   public function lt(){
-    return new XSetOrd(this.with);
+    return new stx.assert.ord.term.XSet(this.with);
   }
 }

@@ -1,11 +1,13 @@
 -main Main
 --interp
 
+-lib tink_core
 -lib utest
 -lib stx_ds
 -lib stx_log
 -lib stx_om
 -lib stx_fn
+-lib stx_log
 
 -cp src/main/haxe
 

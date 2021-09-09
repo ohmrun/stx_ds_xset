@@ -1,16 +1,16 @@
-package stx.ds.xset.pack.suit.xsetwith.cases;
+package stx.assert.ord.term;
 
-class XSetOrd<K,V> implements stx.assert.head.data.Ord<XSetVal<K,V>>{
+class XSet<K,V> implements OrdApi<XSetValT<K,V>>{
   var with : With<K,V>;
   public function new(with){
     this.with = with;
   }
-  public function duoply(a:XSetVal<K,V>,b:XSetVal<K,V>):Ordered{
+  public function comply(a:XSetValT<K,V>,b:XSetValT<K,V>):Ordered{
     return switch([a,b]){
       case [SetVal(k,v),SetVal(k0,v0)]  : 
-        with.K.lt().duoply(k,k0) || with.V.lt().duoply(v,v0);
+        with.K.lt().comply(k,k0) || with.V.lt().comply(v,v0);
       case [SetObj(k,v),SetObj(k0,v0)]  : 
-        with.K.lt().duoply(k,k0) || v.ltx(v0,new XSetComparable(with));
+        with.K.lt().comply(k,k0) || v.ltx(v0,new stx.assert.comparable.term.XSet(with));
       case [SetVal(_),SetObj(_)]        : 
         LessThan;
       case [SetObj(_),SetVal(_)]        : 

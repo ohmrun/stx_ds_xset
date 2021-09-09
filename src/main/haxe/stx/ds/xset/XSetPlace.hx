@@ -1,12 +1,12 @@
-package stx.ds.xset.pack;
+package stx.ds.xset;
 
-enum XSetPlaceDef{
+enum XSetPlaceSum{
   Field(idx:Int,key:String);
   Index(idx:Int);
 }
 
-@:forward abstract XSetPlace(XSetPlaceDef) from XSetPlaceDef to XSetPlaceDef{
-  public function new(self){
+@:forward abstract XSetPlace(XSetPlaceSum) from XSetPlaceSum to XSetPlaceSum{
+  public function new(self:XSetPlaceSum){
     this = self;
   }
   public function index(){

@@ -1,44 +1,42 @@
 package stx.ds.xset.test;
 
-import stx.ds.xset.Package;
-
-using stx.core.Lift;
-using stx.assert.Lift;
-
-@:access(stx.ds.xset)class XerSetTest extends utest.Test{
+@:access(stx.ds.xset)class XerSetTest extends TestCase{
 	public function test(){
 		var a = XSet.makeKV(key(),val());
 				a = a.setVal("hello",1);
 				//trace(a);
 				var ks0 = a.keyspace();
-				Assert.same(ks0.with.state,CKey);
-				a.hasKey("hello").isTrue();
-				a.hasKey("nope").isFalse();
-				a.hasLeaf(1).isTrue();
-				a.hasLeaf(20).isFalse();
+
+				same(ks0.with.state,CKey);
+				is_true(a.hasKey("hello"));
+				is_false(a.hasKey("nope"));
+				is_true(a.has_leaf(1));
+				is_false(a.has_leaf(20));
+		__.log().debug(_ -> _.pure(a));
 		var b = XSet.makeKV(key(),val());
 				b = b.setVal("hello",99);
-				//trace(b);
+		__.log().debug(_ -> _.pure(b));
 		var c = a.keyspace().union(b);
-				c.hasLeaf(99).isTrue();
-		var d = a.setspace().union(b);
-		var e = c.setspace().difference(d);
-		//trace(e);
-		var f = d.difference(c);
+				c.valspace();
+		//c.has_leaf(99);
+		//is_true();
+		//var d = a.setspace().union(b);
+		// var e = c.setspace().difference(d);
+		// //trace(e);
+		// var f = d.difference(c);
 		//trace(f);
 	}
-	public function testDeep(){
-		var a = XSetTree.unit();
-		var stx = __.stx();
-		var b = __.stx().then(obj0());
-		var c = b.toSpine();
-		var d = XSetTree.fromSpine(c);
-		var e = XSetTree.fromSpine(__.of(obj1()).toSpine());
-		trace(d.toObject());
-		trace(e.toObject());
-		var f = d.keyspace().union(e);
-		trace(f.toObject());
-	}
+	// public function testDeep(){
+	// 	var a = XSetTree.unit();
+	// 	var b = obj0();
+	// 	var c = b.toSpine();
+	// 	var d = XSetTree.fromSpine(c);
+	// 	var e = XSetTree.fromSpine(obj1().toSpine());
+	// 	trace(d.toObject());
+	// 	trace(e.toObject());
+	// 	var f = d.keyspace().union(e);
+	// 	trace(f.toObject());
+	// }
 	function obj0():Dynamic{
 		return { 
 			a : {
@@ -63,9 +61,9 @@ using stx.assert.Lift;
 		};
 	}
 	static public function key(){
-		return Comparables.string();
+		return Comparable.String();
 	}
 	static public function val(){
-		return Comparables.int();
+		return Comparable.Int();
 	}
 }

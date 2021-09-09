@@ -1,14 +1,14 @@
-package stx.ds.xset.pack.suit.xsetwith.cases;
+package stx.assert.comparable.term;
 
-class XSetVal<K,V> implements ComparableApi<XSetVal<K,V>>{
+class XSetVal<K,V> implements ComparableApi<XSetValT<K,V>>{
   var val_comparable:Comparable<V>;
   public function new(val_comparable){
     this.val_comparable = val_comparable;
   }
-  public function lt():Ord<XSetVal<K,V>>{
+  public function lt():Ord<XSetValT<K,V>>{
     return new XSetValOrd(this.val_comparable);
   }
-  public function eq():Eq<XSetVal<K,V>>{
+  public function eq():Eq<XSetValT<K,V>>{
     return new XSetValEq(this.val_comparable);
   }
 }

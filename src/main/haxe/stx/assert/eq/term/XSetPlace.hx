@@ -1,7 +1,7 @@
 package stx.assert.eq.term;
 
-class XSetPlace implements EqApi<XSetPlace> extends Clazz{
-  public function duoply(a:XSetPlace,b:XSetPlace):Equaled{
+class XSetPlace implements EqApi<XSetPlaceT> extends Clazz{
+  public function comply(a:XSetPlaceT,b:XSetPlaceT):Equaled{
     return switch ([a,b]){
       case ([Field(idx,key),Field(idx0, key0)]) : 
         idx == idx0 && key == key0 ? AreEqual : NotEqual;

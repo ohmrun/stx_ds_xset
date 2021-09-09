@@ -1,6 +1,0 @@
-package stx.ds.xset.head.data;
-
-import stx.ds.xset.pack.XSetPlace in AXSetPlace;
-import stx.ds.xset.pack.XSet in AXSet;
-
-typedef XSetTree = AXSet<AXSetPlace,Primitive>;

@@ -1,15 +1,15 @@
-package stx.ds.xset.pack.suit.xsetwith.cases;
+package stx.assert.ord.term;
 
-class XSetWithOrd<K,V> implements stx.assert.head.data.Ord<XSetVal<K,V>>{
-  var self : XSetWith<K,V>;
+class XSetWith<K,V> implements OrdApi<XSetValT<K,V>>{
+  var self : XSetWithT<K,V>;
   public function new(self){
     this.self = self;
   }
-  public function duoply(a:XSetVal<K,V>,b:XSetVal<K,V>):Ordered{
+  public function comply(a:XSetValT<K,V>,b:XSetValT<K,V>):Ordered{
     return switch(self.state){
-      case CKey     : XSetWith.key(self.with.K).lt().duoply(a,b);
-      case CVal     : XSetWith.val(self.with.V).lt().duoply(a,b);
-      case CKeyVal  : XSetWith.kv(self.with).lt().duoply(a,b);
+      case CKey     : XSetWithT.key(self.with.K).lt().comply(a,b);
+      case CVal     : XSetWithT.val(self.with.V).lt().comply(a,b);
+      case CKeyVal  : XSetWithT.kv(self.with).lt().comply(a,b);
     }
   }
 }

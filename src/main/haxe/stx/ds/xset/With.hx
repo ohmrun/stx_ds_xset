@@ -1,4 +1,4 @@
-package stx.ds.xset.pack;
+package stx.ds.xset;
 
 class With<K,V>{
   public var K(default,null) : Comparable<K>;
