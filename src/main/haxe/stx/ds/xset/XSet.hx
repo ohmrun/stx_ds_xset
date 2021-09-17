@@ -102,25 +102,11 @@ typedef XSetDef<K,V> = {
       (item) -> keyspace().has(item)
     );
   }
-  public function union(that:XSet<K,V>):XSet<K,V>{
-    __.log().debug(_ -> _.pure([this.data.data,that.data.data]));
-    return switch([this.data.data,that.data.data]){
-      case [Leaf,Leaf]                                                  :  
-        that;
-      case [Node(_, left0, SetObj(k0,v0), right0),Node(_,left1,SetObj(k1,v1),right1)]   : 
-        null;
-      case [Node(_, left0, label0, right0),Node(_,left1,label1,right1)]   : 
-        null;
-      case [x,Leaf]                                                     :
-        this;
-      case [Leaf,x]                                                     :
-        that;
-    }
-  }
   public function difference(that:XSet<K,V>){
     return next(this.data.difference(that.data));
   }
   public function toString(){
     return this.data.toString();
   }
+  
 }

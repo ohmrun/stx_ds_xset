@@ -39,9 +39,6 @@ typedef XSetTreeDef = XSet<XSetPlace,Primitive>;
       default           : DTMixed;
     }
   }
-  public function union(that:XSetTree):XSetTree{
-    return this.union(that.prj());
-  }
   public function put(v):XSetTree{
     return this.put(v);
   }
