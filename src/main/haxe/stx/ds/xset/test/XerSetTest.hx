@@ -3,7 +3,7 @@ package stx.ds.xset.test;
 @:access(stx.ds.xset)class XerSetTest extends TestCase{
 	public function test(){
 		var a = XSet.makeKV(key(),val());
-				a = a.setVal("hello",1);
+				a = a.set_val("hello",1);
 				//trace(a);
 				var ks0 = a.keyspace();
 
@@ -14,7 +14,7 @@ package stx.ds.xset.test;
 				is_false(a.has_leaf(20));
 		__.log().debug(_ -> _.pure(a));
 		var b = XSet.makeKV(key(),val());
-				b = b.setVal("hello",99);
+				b = b.set_val("hello",99);
 		__.log().debug(_ -> _.pure(b));
 		// var c = a.keyspace().union(b);
 		// 		c.valspace();

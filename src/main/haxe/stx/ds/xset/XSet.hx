@@ -7,16 +7,19 @@ typedef XSetDef<K,V> = {
 
 @:forward abstract XSet<K,V>(XSetDef<K,V>) from XSetDef<K,V> to XSetDef<K,V> {
   
-  static public function makeKV<K,V>(key:Comparable<K>,val:Comparable<V>,?data:RedBlackTree<XSetVal<K,V>>){
+  @:noUsing static public function makeKV<K,V>(key:Comparable<K>,val:Comparable<V>,?data:RedBlackTree<XSetVal<K,V>>){
     var with = new XSetWith(new With(key,val));
     return XSet.create(with,RedBlackSet.make(with.comparable(),data));
   }
-  static public function make<K,V>(with:With<K,V>,?data:RedBlackTree<XSetVal<K,V>>){
+  @:noUsing static public function make<K,V>(with:With<K,V>,?data:RedBlackTree<XSetVal<K,V>>){
     var with = new XSetWith(with);
     return new XSet({ with : with , data : RedBlackSet.make(with.comparable(),data) });
   }
-  static public function create<K,V>(with:XSetWith<K,V>,data:RedBlackSet<XSetVal<K,V>>){
+  @:noUsing static public function create<K,V>(with:XSetWith<K,V>,data:RedBlackSet<XSetVal<K,V>>){
     return new XSet({ with : with, data : data});
+  }
+  @:noUsing static public function lift<K,V>(self:XSetDef<K,V>){
+    return new XSet(self);
   }
   private function new(self:XSetDef<K,V>){
     this = self;
@@ -58,10 +61,10 @@ typedef XSetDef<K,V> = {
       case Right(v) : put(SetVal(k,v));
     }
   }
-  public function setVal(k:K,v:V){
+  public function set_val(k:K,v:V){
     return set(k,Right(v));
   }
-  public function setSet(k:K,v:XSet<K,V>){
+  public function set_set(k:K,v:XSet<K,V>){
     return set(k,Left(v));
   }
   function as(st:XSetWithState):XSet<K,V>{
@@ -108,5 +111,10 @@ typedef XSetDef<K,V> = {
   public function toString(){
     return this.data.toString();
   }
-  
+  public function mod(fn:XSetVal<K,V> -> XSetVal<K,V>){
+    return create(this.with,this.data.fold(
+      (next:XSetVal<K,V>,memo:RedBlackSet<XSetVal<K,V>>) -> memo.put(fn(next)),
+      RedBlackSet.make(this.data.with)     
+    ));
+  }
 }

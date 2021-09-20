@@ -1,0 +1,10 @@
+{
+  "build" : {
+    "-lib"    : ["tink_core","utest","stx_ds","stx_log","stx_om","stx_fn","stx_log","stx_pico","stx_nano","stx_xset"],
+    "-cp"     : "src/main/haxe",
+    "interp"  : {
+      "--interp" : true,
+      "-main" : "Main"
+    } 
+  }
+}

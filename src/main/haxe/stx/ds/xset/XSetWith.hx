@@ -2,11 +2,12 @@ package stx.ds.xset;
 
 import stx.assert.comparable.term.Base in BaseComparable;
 
-class XSetWith<K,V>{
+class XSetWith<K,V> extends Clazz{
   public var state(default,null)   : XSetWithState;  
   public var with(default,null)    : With<K,V>;
 
   public function new(with,?state){
+    super();
     this.state  = state == null ? CKeyVal : state;
     this.with   = with;
   }
@@ -35,6 +36,6 @@ class XSetWith<K,V>{
     return new XSetComparable(with);
   }
   public function toString(){
-    return Std.string(state);
+    return identifier();
   }
 }

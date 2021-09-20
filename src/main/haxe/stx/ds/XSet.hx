@@ -27,6 +27,10 @@ typedef XSetPlace                 = stx.ds.xset.XSetPlace;
 
 typedef XSetTree                  = stx.ds.xset.XSetTree;
 typedef XSetTreeType              = stx.ds.xset.XSetTreeType;
+typedef XSetTreeData              = stx.ds.xset.tree.XSetTreeData;
+typedef XSetTreeDataCluster       = stx.ds.xset.tree.XSetTreeDataCluster;
+typedef XSetTreeValDef            = stx.ds.xset.tree.XSetTreeVal.XSetTreeValDef;
+typedef XSetTreeVal               = stx.ds.xset.tree.XSetTreeVal;
 
 typedef XSetVal<K,V>              = stx.ds.xset.XSetVal<K,V>;
 typedef XSetValSum<K,V>           = stx.ds.xset.XSetVal.XSetValSum<K,V>;

@@ -1,8 +1,9 @@
 package stx.ds.xset;
 
-typedef XSetTreeDef = XSet<XSetPlace,Primitive>;
+typedef XSetTreeDef     = XSet<XSetPlace,Primitive>;
 
-@:forward abstract XSetTree(XSetTreeDef) from XSetTreeDef{
+abstract XSetTree(XSetTreeDef) from XSetTreeDef{
+  static public var _(default,never) = XSetTreeLift;
   public function new(self:XSetTreeDef){
     this = self;
   }
@@ -14,7 +15,7 @@ typedef XSetTreeDef = XSet<XSetPlace,Primitive>;
   }
   public function isObject(){
     return this.data.fold(
-      (sv,memo) -> switch([sv.fst(),memo]){
+      (sv,memo) -> switch([sv.fst(),memo]){ 
         case [_,false]            : false;
         case [Field(idx, key),_]  : true;
         case [Index(idx),_]       : false; 
@@ -39,7 +40,7 @@ typedef XSetTreeDef = XSet<XSetPlace,Primitive>;
       default           : DTMixed;
     }
   }
-  public function put(v):XSetTree{
+  public function put(v:XSetTreeVal):XSetTree{
     return this.put(v);
   }
   public function prj():XSetTreeDef{
@@ -85,5 +86,46 @@ typedef XSetTreeDef = XSet<XSetPlace,Primitive>;
       }
     }
     return new XSetTree(rec(sp));
+  }
+  private var self(get,never):XSetTree;
+  private function get_self():XSetTree return this;
+
+  public function get(key:String):XSetTree{
+    return this.filter(
+      (x:XSetTreeVal) -> x.fold(
+        (k,v) -> k.has_key(key),
+        (k,v) -> k.has_key(key)
+      )
+    );
+  }
+  public function hoist(key:String):XSetTree{
+    return this.mod(
+      (next:XSetTreeVal) -> $type(next).fold(
+          (p:XSetPlace,x) -> p.fold(
+            (i,k) -> k == key ? SetObj(Index(stx.ds.xset.tree.Counter.instance.next()),x)  : SetObj(Field(i,k),x),
+            (i)   -> SetObj(Index(i),x) 
+          ),
+          (p:XSetPlace,x) -> p.fold(
+            (i,k) -> k == key ? SetVal(Index(stx.ds.xset.tree.Counter.instance.next()),x)  : SetVal(Field(i,k),x)  ,
+            (i)   -> SetVal(Index(i),x) 
+          )
+      )
+    );
+  }
+  public function toString(){
+    return this.data.toString();
+  }
+}
+class XSetTreeLift{
+  static public function Cluster(?data:Cluster<XSetTreeData>){
+    return __.option(data)
+      .map((x:Cluster<XSetTreeData>) -> XSetTreeDataCluster.pure(x))
+      .def(XSetTreeDataCluster.unit);
+  }
+  static public function Val(key:XSetPlace,val:XSetTreeData){
+    return XSetTreeVal.make(key,val);
+  }
+  static public function Idx(val:XSetTreeData){
+    return XSetTreeVal.make(Index(stx.ds.xset.tree.Counter.instance.next()),val);
   }
 }
