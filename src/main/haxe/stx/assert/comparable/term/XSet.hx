@@ -1,6 +1,6 @@
 package stx.assert.comparable.term;
 
-class XSet<K,V> implements ComparableApi<XSetValT<K,V>>{
+class XSet<K,V> extends ComparableCls<XSetValT<K,V>>{
   var with : With<K,V>;
   public function new(with){
     this.with = with;

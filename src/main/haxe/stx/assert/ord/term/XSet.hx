@@ -1,6 +1,6 @@
 package stx.assert.ord.term;
 
-class XSet<K,V> implements OrdApi<XSetValT<K,V>>{
+class XSet<K,V> extends OrdCls<XSetValT<K,V>>{
   var with : With<K,V>;
   public function new(with){
     this.with = with;

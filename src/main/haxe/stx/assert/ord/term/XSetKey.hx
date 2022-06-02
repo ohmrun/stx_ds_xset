@@ -1,6 +1,7 @@
 package stx.assert.ord.term;
 
-class XSetKey<K,V> implements OrdApi<XSetVal<K,V>>{
+class XSetKey<K,V> extends OrdCls<XSetVal<K,V>>{
+
   var key_comparable:Comparable<K>;
   public function new(key_comparable){
     this.key_comparable = key_comparable;

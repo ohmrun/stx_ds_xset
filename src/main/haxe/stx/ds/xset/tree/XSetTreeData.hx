@@ -4,7 +4,7 @@ typedef XSetTreeDataDef = Either<Primitive,XSetTree>;
 
 @:forward(fold) abstract XSetTreeData(XSetTreeDataDef) from XSetTreeDataDef to XSetTreeDataDef{
   public function new(self) this = self;
-  static public function lift(self:XSetTreeDataDef):XSetTreeData return new XSetTreeData(self);
+  @:noUsing static public function lift(self:XSetTreeDataDef):XSetTreeData return new XSetTreeData(self);
 
   public function prj():XSetTreeDataDef return this;
   private var self(get,never):XSetTreeData;

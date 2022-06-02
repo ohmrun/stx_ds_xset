@@ -4,7 +4,7 @@ typedef XSetTreeValDef  = XSetVal<XSetPlace,Primitive>;
 
 @:forward(fold) abstract XSetTreeVal(XSetTreeValDef) from XSetTreeValDef to XSetTreeValDef{
   public function new(self) this = self;
-  static public function lift(self:XSetTreeValDef):XSetTreeVal return new XSetTreeVal(self);
+  @:noUsing static public function lift(self:XSetTreeValDef):XSetTreeVal return new XSetTreeVal(self);
 
   public function prj():XSetTreeValDef return this;
   private var self(get,never):XSetTreeVal;

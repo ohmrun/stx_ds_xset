@@ -9,7 +9,7 @@ enum XSetValSum<K,V>{
 @:using(stx.ds.xset.XSetVal.XSetValLift)
 abstract XSetVal<K,V>(XSetValSum<K,V>) from XSetValSum<K,V> to XSetValSum<K,V> {
   static public var _(default,never) = XSetValLift;
-  static public function lift<K,V>(self:XSetValSum<K,V>){
+  @:noUsing static public function lift<K,V>(self:XSetValSum<K,V>){
     return new XSetVal(self);
   }
   public function new(self:XSetValSum<K,V>) this = self;

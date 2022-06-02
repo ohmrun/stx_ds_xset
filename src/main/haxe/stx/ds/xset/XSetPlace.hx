@@ -6,7 +6,7 @@ enum XSetPlaceSum{
 }
 
 @:forward abstract XSetPlace(XSetPlaceSum) from XSetPlaceSum to XSetPlaceSum{
-  static public function lift(self:XSetPlaceSum){
+  @:noUsing static public function lift(self:XSetPlaceSum){
     return new XSetPlace(self);
   }
   public function new(self:XSetPlaceSum){

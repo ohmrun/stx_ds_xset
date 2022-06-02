@@ -55,7 +55,7 @@ abstract XSetTree(XSetTreeDef) from XSetTreeDef{
     function(sp):XSetTreeDef{
       return switch sp {
         case Collate(arr) : 
-          var out = arr.prj().mapi(
+          var out = arr.prj().imap(
             (i:Int,kv:Field<Thunk<Spine<Noise>>>) -> {
               return switch(kv.val()){
                 case Primate(p) : SetVal(Field(i,kv.key),p);
@@ -68,7 +68,7 @@ abstract XSetTree(XSetTreeDef) from XSetTreeDef{
           );
           out;
         case Collect(arr)  :   
-          var out = arr.mapi(
+          var out = arr.imap(
             (i,v) -> switch(v()){
               case Primate(p) : SetVal(Index(i),p);
               case x          : SetObj(Index(i),rec(x));
@@ -100,7 +100,7 @@ abstract XSetTree(XSetTreeDef) from XSetTreeDef{
   }
   public function hoist(key:String):XSetTree{
     return this.mod(
-      (next:XSetTreeVal) -> $type(next).fold(
+      (next:XSetTreeVal) -> next.fold(
           (p:XSetPlace,x) -> p.fold(
             (i,k) -> k == key ? SetObj(Index(stx.ds.xset.tree.Counter.instance.next()),x)  : SetObj(Field(i,k),x),
             (i)   -> SetObj(Index(i),x) 

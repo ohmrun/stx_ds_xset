@@ -1,7 +1,7 @@
 package stx.assert.comparable.term;
 
-class XSetPlace implements ComparableApi<XSetPlaceT> extends Clazz{
-
+class XSetPlace extends ComparableCls<XSetPlaceT> {
+  public function new(){}
   public function eq(){
     return new XSetPlaceEq();
   }

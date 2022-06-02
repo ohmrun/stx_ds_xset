@@ -1,7 +1,11 @@
 {
   "build" : {
-    "-lib"    : ["tink_core","utest","stx_ds","stx_log","stx_om","stx_fn","stx_log","stx_pico","stx_nano","stx_xset"],
+    "-D"      : ["no-deprecation-warnings"],
+    "-lib"    : ["tink_core","stx_test","stx_ds","stx_log","stx_om","stx_fn","stx_log","stx_pico","stx_nano","stx_xset"],
     "-cp"     : "src/main/haxe",
+    "unit"    : {
+      "--macro" : ["include('stx.ds',true)"]
+    },
     "interp"  : {
       "--interp" : true,
       "-main" : "Main"

@@ -4,7 +4,7 @@ typedef XSetTreeDataClusterDef = Cluster<XSetTreeData>;
 
 abstract XSetTreeDataCluster(XSetTreeDataClusterDef) from XSetTreeDataClusterDef to XSetTreeDataClusterDef{
   public function new(self) this = self;
-  static public function lift(self:XSetTreeDataClusterDef):XSetTreeDataCluster return new XSetTreeDataCluster(self);
+  @:noUsing static public function lift(self:XSetTreeDataClusterDef):XSetTreeDataCluster return new XSetTreeDataCluster(self);
 
   public function prj():XSetTreeDataClusterDef return this;
   private var self(get,never):XSetTreeDataCluster;
@@ -13,7 +13,7 @@ abstract XSetTreeDataCluster(XSetTreeDataClusterDef) from XSetTreeDataClusterDef
   static public function unit(){
     return lift(Cluster.unit());
   }
-  static public function pure(self:XSetTreeDataClusterDef){
+  @:noUsing static public function pure(self:XSetTreeDataClusterDef){
     return lift(self);
   }
   public function label(key:String){

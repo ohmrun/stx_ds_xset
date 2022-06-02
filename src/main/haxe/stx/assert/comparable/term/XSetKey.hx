@@ -1,6 +1,6 @@
 package stx.assert.comparable.term;
 
-class XSetKey<K,V> implements ComparableApi<XSetVal<K,V>>{
+class XSetKey<K,V> extends ComparableCls<XSetVal<K,V>>{
   var key_comparable : Comparable<K>;
 
   public function new(key_comparable){
