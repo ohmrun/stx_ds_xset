@@ -82,12 +82,12 @@ typedef XSetDef<K,V> = {
   public function has(v){
     return this.data.has(v);
   }
-  public function hasKey(k:K){
+  public function has_key(k:K){
     return keyspace().has(
       SetVal(k,null)
     );
   }
-  public function hasNode(v:XSet<K,V>){
+  public function has_node(v:XSet<K,V>){
     return valspace().has(
       SetObj(null,v)
     );

@@ -8,8 +8,8 @@ package stx.ds.xset.test;
 				var ks0 = a.keyspace();
 
 				same(ks0.with.state,CKey);
-				is_true(a.hasKey("hello"));
-				is_false(a.hasKey("nope"));
+				is_true(a.has_key("hello"));
+				is_false(a.has_key("nope"));
 				is_true(a.has_leaf(1));
 				is_false(a.has_leaf(20));
 		__.log().debug(_ -> _.pure(a));

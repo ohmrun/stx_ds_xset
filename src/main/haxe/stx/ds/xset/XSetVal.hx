@@ -4,7 +4,6 @@ package stx.ds.xset;
 enum XSetValSum<K,V>{
   SetObj(key:K,val:XSet<K,V>);
   SetVal(key:K,val:V);
-  //SetNil;
 }
 @:using(stx.ds.xset.XSetVal.XSetValLift)
 abstract XSetVal<K,V>(XSetValSum<K,V>) from XSetValSum<K,V> to XSetValSum<K,V> {

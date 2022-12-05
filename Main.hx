@@ -6,7 +6,7 @@ import stx.ds.xset.test.*;
 
 class Main {
 	static function main(){
-		__.test(
+		__.test().run(
 			[new XerSetTest()],
 			[]
 		);		
