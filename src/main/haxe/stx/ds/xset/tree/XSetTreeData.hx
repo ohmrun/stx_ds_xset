@@ -1,5 +1,6 @@
 package stx.ds.xset.tree;
 
+
 typedef XSetTreeDataDef = Either<Primitive,XSetTree>;
 
 @:forward(fold) abstract XSetTreeData(XSetTreeDataDef) from XSetTreeDataDef to XSetTreeDataDef{

@@ -1,5 +1,8 @@
 package stx.assert;
 
+using stx.Pico;
+using stx.Assert;
+
 using stx.ds.XSet;
 
 import stx.ds.xset.XSetVal    as XSetValT;
