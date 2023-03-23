@@ -1,4 +1,4 @@
-package stx.assert.comparable.term;
+package stx.assert.ds.xset.comparable.term;
 
 class XSet<K,V> extends ComparableCls<XSetValT<K,V>>{
   var with : With<K,V>;
@@ -6,9 +6,9 @@ class XSet<K,V> extends ComparableCls<XSetValT<K,V>>{
     this.with = with;
   }
   public function eq(){
-    return new stx.assert.eq.term.XSet(this.with);
+    return new stx.assert.ds.xset.eq.term.XSet(this.with);
   }
   public function lt(){
-    return new stx.assert.ord.term.XSet(this.with);
+    return new stx.assert.ds.xset.ord.term.XSet(this.with);
   }
 }

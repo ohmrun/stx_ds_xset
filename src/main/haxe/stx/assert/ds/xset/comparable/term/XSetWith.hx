@@ -1,4 +1,4 @@
-package stx.assert.comparable.term;
+package stx.assert.ds.xset.comparable.term;
 
 class XSetWith<K,V> extends ComparableCls<XSetValT<K,V>>{
   var self : XSetWithT<K,V>;

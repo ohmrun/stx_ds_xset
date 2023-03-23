@@ -1,4 +1,4 @@
-package stx.assert.comparable.term;
+package stx.assert.ds.xset.comparable.term;
 
 class XSetKey<K,V> extends ComparableCls<XSetVal<K,V>>{
   var key_comparable : Comparable<K>;

@@ -1,4 +1,4 @@
-package stx.assert.eq.term;
+package stx.assert.ds.xset.eq.term;
 
 class XSetPlace implements EqApi<XSetPlaceT> extends Clazz{
   public function comply(a:XSetPlaceT,b:XSetPlaceT):Equaled{

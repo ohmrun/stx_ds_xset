@@ -1,4 +1,4 @@
-package stx.assert.eq.term;
+package stx.assert.ds.xset.eq.term;
 
 
 class XSetVal<K,V> implements EqApi<XSetValT<K,V>>{

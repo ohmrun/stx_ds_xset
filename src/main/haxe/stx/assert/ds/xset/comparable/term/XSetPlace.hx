@@ -1,4 +1,4 @@
-package stx.assert.comparable.term;
+package stx.assert.ds.xset.comparable.term;
 
 class XSetPlace extends ComparableCls<XSetPlaceT> {
   public function new(){}

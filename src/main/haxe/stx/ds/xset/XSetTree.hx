@@ -9,7 +9,7 @@ abstract XSetTree(XSetTreeDef) from XSetTreeDef{
   }
   static public function unit():XSetTree{
     return XSet.makeKV(
-      new stx.assert.comparable.term.XSetPlace(),
+      new stx.assert.ds.xset.comparable.term.XSetPlace(),
       new stx.assert.comparable.term.Primitive()
     );
   }

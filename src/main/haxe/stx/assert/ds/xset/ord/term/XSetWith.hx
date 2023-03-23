@@ -1,4 +1,4 @@
-package stx.assert.ord.term;
+package stx.assert.ds.xset.ord.term;
 
 class XSetWith<K,V> extends OrdCls<XSetValT<K,V>>{
   var self : XSetWithT<K,V>;

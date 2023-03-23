@@ -1,4 +1,4 @@
-package stx.assert.ord.term;
+package stx.assert.ds.xset.ord.term;
 
 class XSetKey<K,V> extends OrdCls<XSetVal<K,V>>{
 

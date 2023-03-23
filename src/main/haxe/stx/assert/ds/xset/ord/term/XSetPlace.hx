@@ -1,4 +1,4 @@
-package stx.assert.ord.term;
+package stx.assert.ds.xset.ord.term;
 
 class XSetPlace extends OrdCls<XSetPlaceT>{
   public function new(){}

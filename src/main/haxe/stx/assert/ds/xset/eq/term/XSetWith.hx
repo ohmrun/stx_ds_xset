@@ -1,4 +1,4 @@
-package stx.assert.eq.term;
+package stx.assert.ds.xset.eq.term;
 
 class XSetWith<K,V> implements EqApi<XSetValT<K,V>>{
   var self : XSetWithT<K,V>;
