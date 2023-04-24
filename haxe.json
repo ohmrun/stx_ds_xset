@@ -4,7 +4,10 @@
     "-lib"    : ["tink_core","stx_ds","stx_log","stx_om","stx_fn","stx_log","stx_pico","stx_nano"],
     "-cp"     : "src/main/haxe",
     "unit"    : {
-      "--macro" : ["include('stx.ds',true)"]
+      "--macro" : [
+        "include('stx.ds',true)",
+        "include('stx.assert',true)"
+      ]
     },
     "interp"  : {
       "--interp" : true,
